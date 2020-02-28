@@ -1,27 +1,27 @@
 <template>
   <section id="name" class="page">
     <div class="wrapper">
-      <h3>About me:</h3>
+      <h3 class="page__title">About me</h3>
 
       <div class="list-wrap">
         <div class="gallery">
-          <img
-            src="../assets/images/person-0.jpg"
-            alt="my-photo"
-            width="200"
-            height="250"
-            @click="openModal"
-          />
+          <div class="gallery__main-img">
+            <img
+              :src="slides[defaultSlide]"
+              :style="{height: '250px'}"
+              alt="my-photo"
+              @click="openModal"
+            />
+          </div>
           <div class="gallery__modal" v-if="isGalleryOpened" @click.self="closeModal">
             <div class="pagination">
               <button class="pagination__button pagination__prev-button" @click="prevSlide"></button>
-              <div class="padination__content">
+              <div class="pagination__content">
                 <img
                   :src="slides[currentSlide]"
+                  :style="{height: '500px'}"
                   alt="my-photo"
-                  width="500"
-                  height="500"
-                  @click="openModal"
+                  @click="setDefault"
                 />
               </div>
               <button class="pagination__button pagination__next-button" @click="nextSlide"></button>
@@ -30,9 +30,12 @@
         </div>
 
         <ul class="section-list">
-          <li>Name: Alexander Piskun</li>
-          <li>
-            E-mail:
+          <li class="section-list__item">
+            <span>Name:</span>
+            <p>Alexander Piskun</p>
+          </li>
+          <li class="section-list__item">
+            <span>E-mail:</span>
             <a
               href="mailto:sannnao.developer@gmail.com"
               title="Write me a letter!"
@@ -45,18 +48,19 @@
 </template>
 
 <script>
-import personOne from '../assets/images/person-0.jpg';
-import personTwo from '../assets/images/person-1.jpg';
-import personThree from '../assets/images/person-2.jpg';
-import personFour from '../assets/images/person-3.jpg';
-import personFive from '../assets/images/person-4.jpg';
+import personOne from "../assets/images/person-0.jpg";
+import personTwo from "../assets/images/person-1.jpg";
+import personThree from "../assets/images/person-2.jpg";
+import personFour from "../assets/images/person-3.jpg";
+import personFive from "../assets/images/person-4.jpg";
 
 export default {
   data() {
     return {
       isGalleryOpened: false,
       slides: [personOne, personTwo, personThree, personFour, personFive],
-      currentSlide: 0,
+      defaultSlide: 0,
+      currentSlide: 0
     };
   },
   methods: {
@@ -79,6 +83,9 @@ export default {
       } else {
         this.currentSlide += 1;
       }
+    },
+    setDefault() {
+      this.defaultSlide = this.currentSlide;
     }
   }
 };
@@ -87,25 +94,37 @@ export default {
 <style lang="scss">
 .page {
   height: 100vh - $header-height;
-  margin: 0 20px -75px 20px;
-  padding-top: 125px;
-  padding-bottom: 50px;
-  border-bottom: 1px solid hsla(132, 6%, 15%, 0.5);
+  padding-top: 15vh;
+
+  &__title {
+    margin-bottom: 8vh;
+    text-align: center;
+  }
 }
 
 .list-wrap {
   display: flex;
-  justify-content: space-between;
   min-height: 150px;
-  padding: 0 50px;
 }
 
 .gallery {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: space-between;
-  width: 250px;
-  height: 200px;
+  flex-grow: 1;
+
+  &__main-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 5%;
+
+    &:hover {
+      transform: scale(1.02);
+      transition: 0.1s;
+      box-shadow: 0 0 10px 0 hsla(132, 6%, 15%, 0.5);
+    }
+  }
 
   &__modal {
     position: absolute;
@@ -151,6 +170,11 @@ export default {
 
   &__content {
     grid-area: 1 / 2 / 2 / 3;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
   }
 
   &__next-button {
@@ -159,9 +183,25 @@ export default {
 }
 
 .section-list {
+  flex-grow: 2;
   display: flex;
   flex-direction: column;
+  list-style: inside;
   list-style-type: circle;
+
+  &__item {
+    display: flex;
+
+    span {
+      flex-grow: 1;
+    }
+
+    a {
+      height: 100%;
+      color: hsl(349, 100%, 33%);
+      border-bottom: 1px solid hsla(132, 6%, 15%, 0);
+    }
+  }
 }
 
 .list-wrap li {
@@ -179,16 +219,9 @@ export default {
   background-color: hsl(0, 0%, 91%);
 }
 
-.list-wrap li a {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  color: hsl(349, 100%, 33%);
-  border-bottom: 1px solid hsla(132, 6%, 15%, 0);
-}
 
 .list-wrap li a:hover {
-  font-size: 19px;
+  transform: scale(1.1);
   border-bottom: 1px solid hsla(132, 6%, 15%, 0.5);
   transition: 0.1s;
 }
