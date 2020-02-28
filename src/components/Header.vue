@@ -27,23 +27,32 @@ export default {
   position: fixed;
   z-index: 1;
   width: 100%;
+  height: $header-height;
   background-color: hsl(173, 14%, 12%);
+
+  &__navigation {
+    height: 100%;
+  }
 }
 
 .menu {
   display: flex;
+  height: 100%;
   list-style: none;
 
   &__item {
     flex-grow: 1;
+    height: 100%;
     font-weight: 400;
     letter-spacing: 1.5px;
     text-align: center;
     color: hsl(180, 7%, 57%);
 
     a {
-      display: block;
-      padding: 2vh 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
       font-size: 1.7rem;
 
       &:hover {

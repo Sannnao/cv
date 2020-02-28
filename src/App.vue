@@ -1,41 +1,44 @@
 <template>
-  <Header :menuItems="menuItems"></Header>
+  <div class="app-wrapper">
+    <Header :menuItems="menuItems"></Header>
+    <main>
+      <InfoPage></InfoPage>
+    </main>
+  </div>
 </template>
 
 <script>
-import Header from './components/Header';
+import Header from "./components/Header";
+import InfoPage from "./components/InfoPage";
 
 export default {
   components: {
-    Header
+    Header,
+    InfoPage
   },
   data() {
     return {
       menuItems: [
-        { link: "#name", title: "Name" },
-        { link: "#e-mail", title: "E-mail" },
+        { link: "#about-me", title: "About me" },
         { link: "#summary", title: "Summary" },
         { link: "#skills", title: "Skills" },
-        { link: "#code-examples", title: "Code Examples" },
         { link: "#experience", title: "Experience" },
-        { link: "#education", title: "Education" },
-        { link: "#english", title: "English" }
       ]
     };
-  },
+  }
 };
 </script>
 
 <style lang="scss">
 @font-face {
-  font-family: 'Montserrat';
-  src: url('./assets/fonts/Montserrat/Montserrat-Regular.ttf');
+  font-family: "Montserrat";
+  src: url("./assets/fonts/Montserrat/Montserrat-Regular.ttf");
   font-weight: 400;
 }
 
 @font-face {
-  font-family: 'Nunito';
-  src: url('./assets/fonts/Nunito/Nunito-Bold.ttf');
+  font-family: "Nunito";
+  src: url("./assets/fonts/Nunito/Nunito-Bold.ttf");
   font-weight: 700;
 }
 
@@ -58,27 +61,24 @@ a {
   color: inherit;
 }
 
-h1, h3 {
-  font-weight: bold;
-  font-family: "Nunito", "Arial", sans-serif;
-}
-
 h1 {
-  padding-top: 50px;
-  padding-bottom: 20px;
-  font-size: 50px;
-  color: hsl(132, 6%, 15%);
-  border-bottom: 1px solid hsl(132, 6%, 15%);
+  font-size: 5rem;
+  color: $h-color;
 }
 
 h3 {
-  font-size: 30px;
-  color: hsl(132, 6%, 15%);
+  font-size: 3rem;
+  color: $h-color;
 }
 
 .wrapper {
   width: 1024px;
   height: 100%;
   margin: 0 auto;
+}
+
+main {
+  position: relative;
+  top: $header-height;
 }
 </style>
