@@ -1,5 +1,6 @@
 .DS_Store
 node_modules
+rsschool-2019Q1-cv
 /dist
 
 # local env files
