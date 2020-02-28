@@ -219,6 +219,7 @@ export default {
   background-color: hsl(0, 0%, 91%);
 }
 
+
 .list-wrap li a:hover {
   transform: scale(1.1);
   border-bottom: 1px solid hsla(132, 6%, 15%, 0.5);
