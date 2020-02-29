@@ -36,12 +36,6 @@ export default {
   font-weight: 400;
 }
 
-@font-face {
-  font-family: "Nunito";
-  src: url("./assets/fonts/Nunito/Nunito-Bold.ttf");
-  font-weight: 700;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -81,9 +75,5 @@ h3 {
   display: grid;
   grid-template-rows: 40px 1fr;
   height: 100vh;
-}
-
-main {
-
 }
 </style>

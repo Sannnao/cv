@@ -86,8 +86,6 @@
 import personOne from "../assets/images/person-0.jpg";
 import personTwo from "../assets/images/person-1.jpg";
 import personThree from "../assets/images/person-2.jpg";
-import personFour from "../assets/images/person-3.jpg";
-import personFive from "../assets/images/person-4.jpg";
 
 import Pagination from "./Pagination";
 
@@ -98,7 +96,7 @@ export default {
   data() {
     return {
       isGalleryOpened: false,
-      slides: [personOne, personTwo, personThree, personFour, personFive],
+      slides: [personOne, personTwo, personThree],
       defaultSlide: 0,
       socialPanelRight: -180,
       socialPanelShown: false
@@ -274,7 +272,6 @@ export default {
     }
 
     &__person-name {
-      // display: flex;
       position: relative;
       overflow: hidden;
 
@@ -336,10 +333,6 @@ export default {
 
 .vk-btn {
   background: url("../assets/images/vk.png") 50% 50%/100% no-repeat;
-}
-
-.google-btn {
-  background: url("../assets/images/google.png") 50% 50%/100% no-repeat;
 }
 
 .inst-btn {
