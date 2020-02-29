@@ -23,6 +23,7 @@
             <span>Name:</span>
             <p
               class="section-list__item__person-name__name"
+              :style="personNamePosition"
               @click="toggleSocialPanel"
             >Alexander Piskun</p>
             <ul class="social-panel" :style="socialPanelPosition">
@@ -98,8 +99,9 @@ export default {
       isGalleryOpened: false,
       slides: [personOne, personTwo, personThree],
       defaultSlide: 0,
-      socialPanelRight: -180,
-      socialPanelShown: false
+      socialPanelRight: '-151px',
+      socialPanelShown: false,
+      personNameRight: 0,
     };
   },
   methods: {
@@ -113,17 +115,25 @@ export default {
       this.defaultSlide = currentSlide;
     },
     showSocialPanel() {
-      this.socialPanelRight = "50%";
+      this.socialPanelRight = "10px";
     },
     hideSocialPanel() {
-      this.socialPanelRight = "-180px";
+      this.socialPanelRight = "-151px";
+    },
+    shiftPersonName() {
+      this.personNameRight = "161px";
+    },
+    unshiftPersonName() {
+      this.personNameRight = "0";
     },
     toggleSocialPanel() {
       if (this.socialPanelShown) {
         this.hideSocialPanel();
+        this.unshiftPersonName();
         this.socialPanelShown = false;
       } else {
         this.showSocialPanel();
+        this.shiftPersonName();
         this.socialPanelShown = true;
       }
     }
@@ -131,6 +141,9 @@ export default {
   computed: {
     socialPanelPosition() {
       return { right: this.socialPanelRight };
+    },
+    personNamePosition() {
+      return { right: this.personNameRight };
     }
   }
 };
@@ -174,7 +187,7 @@ export default {
 
   &__modal {
     position: absolute;
-    z-index: 2;
+    z-index: 9999;
     top: 0;
     left: 0;
 
@@ -276,6 +289,9 @@ export default {
       overflow: hidden;
 
       &__name {
+        position: relative;
+        transition: right 1s;
+
         &:hover {
           transform: scale(1.05);
           cursor: pointer;
@@ -302,11 +318,11 @@ export default {
 .social-panel {
   position: absolute;
   z-index: 1;
-  right: -180px;
+  right: -150px;
   display: flex;
   background-color: hsl(0, 0%, 91%);
   list-style: none;
-  transition: right 0.2s;
+  transition: right 0.5s;
 
   animation-name: social-shadow;
   animation-duration: 2s;
@@ -319,6 +335,7 @@ export default {
 
   &:hover {
     transform: scale(1.1);
+    transition: 0.2s;
     opacity: 0.8;
   }
 
