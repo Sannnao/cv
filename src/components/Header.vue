@@ -24,10 +24,6 @@ export default {
 
 <style lang="scss">
 .header {
-  position: fixed;
-  z-index: 1;
-  width: 100%;
-  height: $header-height;
   background-color: hsl(173, 14%, 12%);
 
   &__navigation {

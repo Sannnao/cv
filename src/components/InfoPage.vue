@@ -14,25 +14,60 @@
             />
           </div>
           <div class="gallery__modal" v-if="isGalleryOpened" @click.self="closeModal">
-            <div class="pagination">
-              <button class="pagination__button pagination__prev-button" @click="prevSlide"></button>
-              <div class="pagination__content">
-                <img
-                  :src="slides[currentSlide]"
-                  :style="{height: '500px'}"
-                  alt="my-photo"
-                  @click="setDefault"
-                />
-              </div>
-              <button class="pagination__button pagination__next-button" @click="nextSlide"></button>
-            </div>
+            <Pagination :setDefault="setDefault" :defaultSlide="defaultSlide" :slides="slides"></Pagination>
           </div>
         </div>
 
         <ul class="section-list">
-          <li class="section-list__item">
+          <li class="section-list__item section-list__item__person-name">
             <span>Name:</span>
-            <p>Alexander Piskun</p>
+            <p
+              class="section-list__item__person-name__name"
+              @click="toggleSocialPanel"
+            >Alexander Piskun</p>
+            <ul class="social-panel" :style="socialPanelPosition">
+              <li>
+                <a
+                  href="https://www.facebook.com/profile.php?id=100001634313768"
+                  title="to facebook"
+                  target="_blank"
+                >
+                  <div class="social-button facebook-btn"></div>
+                </a>
+              </li>
+
+              <li>
+                <a href="https://vk.com/bluestone" title="to vk" target="_blank">
+                  <div class="social-button vk-btn"></div>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  href="https://www.instagram.com/stormyweather_hoho/"
+                  title="to instagram"
+                  target="_blank"
+                >
+                  <div class="social-button inst-btn"></div>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/alexander-piskun-0a2a13175/"
+                  title="to linkedin"
+                  target="_blank"
+                >
+                  <div class="social-button in-btn"></div>
+                </a>
+              </li>
+
+              <li>
+                <a href="https://t.me/sannnao" title="to telegram" target="_blank">
+                  <div class="social-button t-btn"></div>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="section-list__item">
             <span>E-mail:</span>
@@ -51,16 +86,20 @@
 import personOne from "../assets/images/person-0.jpg";
 import personTwo from "../assets/images/person-1.jpg";
 import personThree from "../assets/images/person-2.jpg";
-import personFour from "../assets/images/person-3.jpg";
-import personFive from "../assets/images/person-4.jpg";
+
+import Pagination from "./Pagination";
 
 export default {
+  components: {
+    Pagination
+  },
   data() {
     return {
       isGalleryOpened: false,
-      slides: [personOne, personTwo, personThree, personFour, personFive],
+      slides: [personOne, personTwo, personThree],
       defaultSlide: 0,
-      currentSlide: 0
+      socialPanelRight: -180,
+      socialPanelShown: false
     };
   },
   methods: {
@@ -70,22 +109,28 @@ export default {
     closeModal() {
       this.isGalleryOpened = false;
     },
-    prevSlide() {
-      if (this.currentSlide === 0) {
-        this.currentSlide = this.slides.length - 1;
-      } else {
-        this.currentSlide -= 1;
-      }
+    setDefault(currentSlide) {
+      this.defaultSlide = currentSlide;
     },
-    nextSlide() {
-      if (this.currentSlide === this.slides.length - 1) {
-        this.currentSlide = 0;
-      } else {
-        this.currentSlide += 1;
-      }
+    showSocialPanel() {
+      this.socialPanelRight = "50%";
     },
-    setDefault() {
-      this.defaultSlide = this.currentSlide;
+    hideSocialPanel() {
+      this.socialPanelRight = "-180px";
+    },
+    toggleSocialPanel() {
+      if (this.socialPanelShown) {
+        this.hideSocialPanel();
+        this.socialPanelShown = false;
+      } else {
+        this.showSocialPanel();
+        this.socialPanelShown = true;
+      }
+    }
+  },
+  computed: {
+    socialPanelPosition() {
+      return { right: this.socialPanelRight };
     }
   }
 };
@@ -93,12 +138,13 @@ export default {
 
 <style lang="scss">
 .page {
-  height: 100vh - $header-height;
-  padding-top: 15vh;
+  display: flex;
 
   &__title {
-    margin-bottom: 8vh;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
   }
 }
 
@@ -128,6 +174,7 @@ export default {
 
   &__modal {
     position: absolute;
+    z-index: 2;
     top: 0;
     left: 0;
 
@@ -191,6 +238,18 @@ export default {
 
   &__item {
     display: flex;
+    min-height: 40px;
+    padding: 10px 20px;
+    font-weight: 400;
+    font-size: 18px;
+    word-spacing: 7px;
+    line-height: 1.8em;
+    letter-spacing: 1.5px;
+    color: hsl(132, 6%, 15%);
+
+    &:hover {
+      background-color: hsl(0, 0%, 91%);
+    }
 
     span {
       flex-grow: 1;
@@ -200,33 +259,91 @@ export default {
       height: 100%;
       color: hsl(349, 100%, 33%);
       border-bottom: 1px solid hsla(132, 6%, 15%, 0);
+
+      &:hover {
+        transform: scale(1.1);
+        border-bottom: 1px solid hsla(132, 6%, 15%, 0.5);
+        transition: 0.1s;
+      }
+
+      &:active {
+        text-shadow: hsl(349, 100%, 33%) 0px 0px 1px;
+      }
+    }
+
+    &__person-name {
+      position: relative;
+      overflow: hidden;
+
+      &__name {
+        &:hover {
+          transform: scale(1.05);
+          cursor: pointer;
+        }
+      }
     }
   }
 }
 
-.list-wrap li {
-  min-height: 40px;
-  padding: 10px 20px;
-  font-weight: 400;
-  font-size: 18px;
-  word-spacing: 7px;
-  line-height: 1.8em;
-  letter-spacing: 1.5px;
-  color: hsl(132, 6%, 15%);
+@keyframes social-shadow {
+  0% {
+    box-shadow: 0 0 5px 0 hsla(132, 6%, 15%, 0.5);
+  }
+
+  50% {
+    box-shadow: 0 0 15px 0 hsla(132, 6%, 15%, 0.5);
+  }
+
+  100% {
+    box-shadow: 0 0 5px 0 hsla(132, 6%, 15%, 0.5);
+  }
 }
 
-.list-wrap li:hover {
+.social-panel {
+  position: absolute;
+  z-index: 1;
+  right: -180px;
+  display: flex;
   background-color: hsl(0, 0%, 91%);
+  list-style: none;
+  transition: right 0.2s;
+
+  animation-name: social-shadow;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
 }
 
+.social-button {
+  width: 30px;
+  height: 30px;
 
-.list-wrap li a:hover {
-  transform: scale(1.1);
-  border-bottom: 1px solid hsla(132, 6%, 15%, 0.5);
-  transition: 0.1s;
+  &:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
 }
 
-.list-wrap li a:active {
-  text-shadow: hsl(349, 100%, 33%) 0px 0px 1px;
+.facebook-btn {
+  background: url("../assets/images/facebook.png") 50% 50%/100% no-repeat;
+}
+
+.vk-btn {
+  background: url("../assets/images/vk.png") 50% 50%/100% no-repeat;
+}
+
+.inst-btn {
+  background: url("../assets/images/instagram.png") 50% 50%/100% no-repeat;
+}
+
+.in-btn {
+  background: url("../assets/images/linkedin.png") 50% 50%/100% no-repeat;
+}
+
+.t-btn {
+  background: url("../assets/images/telegram.png") 50% 50%/100% no-repeat;
 }
 </style>
