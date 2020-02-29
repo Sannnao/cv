@@ -14,18 +14,7 @@
             />
           </div>
           <div class="gallery__modal" v-if="isGalleryOpened" @click.self="closeModal">
-            <div class="pagination">
-              <button class="pagination__button pagination__prev-button" @click="prevSlide"></button>
-              <div class="pagination__content">
-                <img
-                  :src="slides[currentSlide]"
-                  :style="{height: '500px'}"
-                  alt="my-photo"
-                  @click="setDefault"
-                />
-              </div>
-              <button class="pagination__button pagination__next-button" @click="nextSlide"></button>
-            </div>
+            <Pagination :setDefault="setDefault" :defaultSlide="defaultSlide" :slides="slides"></Pagination>
           </div>
         </div>
 
@@ -54,13 +43,17 @@ import personThree from "../assets/images/person-2.jpg";
 import personFour from "../assets/images/person-3.jpg";
 import personFive from "../assets/images/person-4.jpg";
 
+import Pagination from './Pagination'
+
 export default {
+  components: {
+    Pagination,
+  },
   data() {
     return {
       isGalleryOpened: false,
       slides: [personOne, personTwo, personThree, personFour, personFive],
       defaultSlide: 0,
-      currentSlide: 0
     };
   },
   methods: {
@@ -70,22 +63,8 @@ export default {
     closeModal() {
       this.isGalleryOpened = false;
     },
-    prevSlide() {
-      if (this.currentSlide === 0) {
-        this.currentSlide = this.slides.length - 1;
-      } else {
-        this.currentSlide -= 1;
-      }
-    },
-    nextSlide() {
-      if (this.currentSlide === this.slides.length - 1) {
-        this.currentSlide = 0;
-      } else {
-        this.currentSlide += 1;
-      }
-    },
-    setDefault() {
-      this.defaultSlide = this.currentSlide;
+    setDefault(currentSlide) {
+      this.defaultSlide = currentSlide;
     }
   }
 };
