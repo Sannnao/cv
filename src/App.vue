@@ -77,8 +77,13 @@ h3 {
   margin: 0 auto;
 }
 
+.app-wrapper {
+  display: grid;
+  grid-template-rows: 40px 1fr;
+  height: 100vh;
+}
+
 main {
-  position: relative;
-  top: $header-height;
+
 }
 </style>
