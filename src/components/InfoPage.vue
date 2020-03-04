@@ -5,7 +5,7 @@
 
       <div class="list-wrap">
         <div class="gallery">
-          <div class="gallery__main-img">
+          <div class="gallery__default-img">
             <img
               :src="slides[defaultSlide]"
               :style="{height: '250px'}"
@@ -19,10 +19,10 @@
         </div>
 
         <ul class="section-list">
-          <li class="section-list__item section-list__item__person-name">
+          <li class="section-list__item section-list__item-name">
             <span>Name:</span>
             <p
-              class="section-list__item__person-name__name"
+              class="section-list__name"
               :style="personNamePosition"
               @click="toggleSocialPanel"
             >Alexander Piskun</p>
@@ -99,9 +99,9 @@ export default {
       isGalleryOpened: false,
       slides: [personOne, personTwo, personThree],
       defaultSlide: 0,
-      socialPanelRight: '-151px',
+      socialPanelRight: "-151px",
       socialPanelShown: false,
-      personNameRight: 0,
+      personNameRight: 0
     };
   },
   methods: {
@@ -169,7 +169,7 @@ export default {
 .gallery {
   flex-grow: 1;
 
-  &__main-img {
+  &__default-img {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -284,19 +284,21 @@ export default {
       }
     }
 
-    &__person-name {
+    &-name {
       position: relative;
       overflow: hidden;
+    }
+  }
 
-      &__name {
-        position: relative;
-        transition: right 1s;
+  &__name {
+    position: relative;
+    transition: right 1s, transform 0.2s;
 
-        &:hover {
-          transform: scale(1.05);
-          cursor: pointer;
-        }
-      }
+    &:hover {
+      transform: scale(1.05);
+      transition: right 1s, transform 0.2s;
+      text-shadow: 0 0 10px hsla(132, 6%, 15%, 0.5);
+      cursor: pointer;
     }
   }
 }
