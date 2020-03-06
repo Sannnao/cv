@@ -19,7 +19,7 @@
         </div>
 
         <ul class="section-list">
-          <li class="section-list__item section-list__item-name">
+          <li class="section-list__item section-list__name-container">
             <span>Name:</span>
             <p
               class="section-list__name"
@@ -249,6 +249,11 @@ export default {
   list-style: inside;
   list-style-type: circle;
 
+  &__name-container {
+    position: relative;
+    overflow: hidden;
+  }
+
   &__item {
     display: flex;
     min-height: 40px;
@@ -282,11 +287,6 @@ export default {
       &:active {
         text-shadow: hsl(349, 100%, 33%) 0px 0px 1px;
       }
-    }
-
-    &-name {
-      position: relative;
-      overflow: hidden;
     }
   }
 
