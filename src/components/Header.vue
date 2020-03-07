@@ -24,7 +24,14 @@ export default {
 
 <style lang="scss">
 .header {
+  position: relative;
+  top: -30px;
   background-color: hsl(173, 14%, 12%);
+  transition: top 1s;
+
+  &:hover {
+    top: 0;
+  }
 
   &__navigation {
     height: 100%;

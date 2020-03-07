@@ -39,8 +39,6 @@ export default {
 
 <style lang="scss">
 .gallery {
-  flex-grow: 1;
-
   &__default-img {
     display: flex;
     justify-content: center;

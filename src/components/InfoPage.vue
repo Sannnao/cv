@@ -1,13 +1,13 @@
 <template>
   <section id="name" class="page">
-    <div class="wrapper">
-      <h3 class="page__title">About me</h3>
+    <div class="wrapper page__wrapper">
+      <div class="page__gallery-wrap">
+        <Gallery :slides="personSlides"></Gallery>
+        <Gallery :slides="portfolioSlides"></Gallery>
+      </div>
 
-      <div class="list-wrap">
-        <Gallery
-          :slides="slides"
-        >
-        </Gallery>
+      <div class="page__list-wrap">
+        <h3 class="page__title">About me</h3>
 
         <ul class="section-list">
           <li class="section-list__item section-list__name-container">
@@ -16,9 +16,18 @@
               class="section-list__name"
               :style="personNamePosition"
               @click="toggleSocialPanel"
-            >
-              Alexander Piskun</p>
+            >Alexander Piskun</p>
             <ul class="social-panel" :style="socialPanelPosition">
+              <li>
+                <a
+                  href="https://github.com/sannnao"
+                  title="to github"
+                  target="_blank"
+                >
+                  <div class="social-button github-btn"></div>
+                </a>
+              </li>
+
               <li>
                 <a
                   href="https://www.facebook.com/profile.php?id=100001634313768"
@@ -80,7 +89,13 @@ import personOne from "../assets/images/person-0.jpg";
 import personTwo from "../assets/images/person-1.jpg";
 import personThree from "../assets/images/person-2.jpg";
 
-import Gallery from './Gallery';
+import culturePortal from "../assets/images/culture-portal.png";
+import hexal from "../assets/images/hexal.jpg";
+import neutronMail from "../assets/images/neutron-mail.jpg";
+import piskelClone from "../assets/images/piskel-clone.png";
+import youtubeClient from "../assets/images/youtube-client.png";
+
+import Gallery from "./Gallery";
 
 export default {
   components: {
@@ -88,10 +103,17 @@ export default {
   },
   data() {
     return {
-      slides: [personOne, personTwo, personThree],
-      socialPanelRight: "-151px",
+      personSlides: [personOne, personTwo, personThree],
+      portfolioSlides: [
+        culturePortal,
+        hexal,
+        neutronMail,
+        piskelClone,
+        youtubeClient
+      ],
+      socialPanelRight: "-181px",
       socialPanelShown: false,
-      personNameRight: '',
+      personNameRight: ""
     };
   },
   methods: {
@@ -99,10 +121,10 @@ export default {
       this.socialPanelRight = "10px";
     },
     hideSocialPanel() {
-      this.socialPanelRight = "-151px";
+      this.socialPanelRight = "-181px";
     },
     shiftPersonName() {
-      this.personNameRight = "161px";
+      this.personNameRight = "191px";
     },
     unshiftPersonName() {
       this.personNameRight = "0";
@@ -133,6 +155,12 @@ export default {
 <style lang="scss">
 .page {
   display: flex;
+  height: 100%;
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+  }
 
   &__title {
     display: flex;
@@ -140,14 +168,24 @@ export default {
     align-items: center;
     height: 30vh;
   }
+
+  &__gallery-wrap {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 80%;
+  }
+
+  &__list-wrap {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 150px;
+  }
 }
-
-.list-wrap {
-  display: flex;
-  min-height: 150px;
-}
-
-
 
 .section-list {
   flex-grow: 2;
@@ -171,6 +209,9 @@ export default {
     line-height: 1.8em;
     letter-spacing: 1.5px;
     color: hsl(132, 6%, 15%);
+    background-color: #fff;
+    transition: background-color 0.5s;
+
 
     &:hover {
       background-color: hsl(0, 0%, 91%);
@@ -228,7 +269,7 @@ export default {
 .social-panel {
   position: absolute;
   z-index: 1;
-  right: -150px;
+  right: -181px;
   display: flex;
   background-color: hsl(0, 0%, 91%);
   list-style: none;
@@ -252,6 +293,10 @@ export default {
   &:active {
     transform: scale(0.9);
   }
+}
+
+.github-btn {
+  background: url("../assets/images/facebook.png") 50% 50%/100% no-repeat;
 }
 
 .facebook-btn {
