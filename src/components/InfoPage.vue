@@ -17,59 +17,7 @@
               :style="personNamePosition"
               @click="toggleSocialPanel"
             >Alexander Piskun</p>
-            <ul class="social-panel" :style="socialPanelPosition">
-              <li>
-                <a
-                  href="https://github.com/sannnao"
-                  title="to github"
-                  target="_blank"
-                >
-                  <div class="social-button github-btn"></div>
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="https://www.facebook.com/profile.php?id=100001634313768"
-                  title="to facebook"
-                  target="_blank"
-                >
-                  <div class="social-button facebook-btn"></div>
-                </a>
-              </li>
-
-              <li>
-                <a href="https://vk.com/bluestone" title="to vk" target="_blank">
-                  <div class="social-button vk-btn"></div>
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="https://www.instagram.com/stormyweather_hoho/"
-                  title="to instagram"
-                  target="_blank"
-                >
-                  <div class="social-button inst-btn"></div>
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="https://www.linkedin.com/in/alexander-piskun-0a2a13175/"
-                  title="to linkedin"
-                  target="_blank"
-                >
-                  <div class="social-button in-btn"></div>
-                </a>
-              </li>
-
-              <li>
-                <a href="https://t.me/sannnao" title="to telegram" target="_blank">
-                  <div class="social-button t-btn"></div>
-                </a>
-              </li>
-            </ul>
+            <SocialPanel :style="socialPanelPosition" :socialList="socialPanelData"></SocialPanel>
           </li>
           <li class="section-list__item">
             <span>E-mail:</span>
@@ -96,10 +44,12 @@ import piskelClone from "../assets/images/piskel-clone.png";
 import youtubeClient from "../assets/images/youtube-client.png";
 
 import Gallery from "./Gallery";
+import SocialPanel from "./SocialPanel";
 
 export default {
   components: {
-    Gallery
+    Gallery,
+    SocialPanel
   },
   data() {
     return {
@@ -110,6 +60,38 @@ export default {
         neutronMail,
         piskelClone,
         youtubeClient
+      ],
+      socialPanelData: [
+        {
+          link: "https://github.com/sannnao",
+          title: "to github",
+          btnClass: "github-btn"
+        },
+        {
+          link: "https://www.facebook.com/profile.php?id=100001634313768",
+          title: "to facebook",
+          btnClass: "facebook-btn"
+        },
+        {
+          link: "https://vk.com/bluestone",
+          title: "to vk",
+          btnClass: "vk-btn"
+        },
+        {
+          link: "https://www.instagram.com/stormyweather_hoho/",
+          title: "to instagram",
+          btnClass: "inst-btn"
+        },
+        {
+          link: "https://www.linkedin.com/in/alexander-piskun-0a2a13175/",
+          title: "to linkedin",
+          btnClass: "in-btn"
+        },
+        {
+          link: "https://t.me/sannnao",
+          title: "to telegram",
+          btnClass: "t-btn"
+        }
       ],
       socialPanelRight: "-181px",
       socialPanelShown: false,
@@ -212,7 +194,6 @@ export default {
     background-color: #fff;
     transition: background-color 0.5s;
 
-
     &:hover {
       background-color: hsl(0, 0%, 91%);
     }
@@ -250,72 +231,5 @@ export default {
       cursor: pointer;
     }
   }
-}
-
-@keyframes social-shadow {
-  0% {
-    box-shadow: 0 0 5px 0 hsla(132, 6%, 15%, 0.5);
-  }
-
-  50% {
-    box-shadow: 0 0 15px 0 hsla(132, 6%, 15%, 0.5);
-  }
-
-  100% {
-    box-shadow: 0 0 5px 0 hsla(132, 6%, 15%, 0.5);
-  }
-}
-
-.social-panel {
-  position: absolute;
-  z-index: 1;
-  right: -181px;
-  display: flex;
-  background-color: hsl(0, 0%, 91%);
-  list-style: none;
-  transition: right 0.5s;
-
-  animation-name: social-shadow;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-}
-
-.social-button {
-  width: 30px;
-  height: 30px;
-
-  &:hover {
-    transform: scale(1.1);
-    transition: 0.2s;
-    opacity: 0.8;
-  }
-
-  &:active {
-    transform: scale(0.9);
-  }
-}
-
-.github-btn {
-  background: url("../assets/images/facebook.png") 50% 50%/100% no-repeat;
-}
-
-.facebook-btn {
-  background: url("../assets/images/facebook.png") 50% 50%/100% no-repeat;
-}
-
-.vk-btn {
-  background: url("../assets/images/vk.png") 50% 50%/100% no-repeat;
-}
-
-.inst-btn {
-  background: url("../assets/images/instagram.png") 50% 50%/100% no-repeat;
-}
-
-.in-btn {
-  background: url("../assets/images/linkedin.png") 50% 50%/100% no-repeat;
-}
-
-.t-btn {
-  background: url("../assets/images/telegram.png") 50% 50%/100% no-repeat;
 }
 </style>
