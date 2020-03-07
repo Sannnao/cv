@@ -51,13 +51,35 @@ export default {
   box-shadow: 0 0 50px 25px hsla(0, 0%, 100%, 0.3);
 
   &__button {
+    @keyframes pagination-btn-shadow {
+
+  0% {
+    box-shadow: 0 0 8px 0px hsla(0, 0%, 100%, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 15px 0px hsla(0, 0%, 100%, 0.3);
+  }
+
+  100% {
+    box-shadow: 0 0 8px 0px hsla(0, 0%, 100%, 0.3);
+  }
+}
+
+  animation-name: pagination-btn-shadow;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+
     width: 5vh;
     height: 5vh;
     background-color: inherit;
     outline: none;
     border: none;
     border-radius: 5px;
-    box-shadow: 0 0 10px 5px hsla(0, 0%, 100%, 0.3);
+
+    &:hover {
+      cursor: pointer;
+    }
 
     &:active {
       transform: scale(0.9);

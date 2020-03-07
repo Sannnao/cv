@@ -34,7 +34,6 @@ export default {
   z-index: 1;
   transform: translateX(241px);
   display: flex;
-  background-color: hsl(0, 0%, 91%);
   list-style: none;
   transition: transform 0.8s;
 
