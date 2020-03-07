@@ -4,19 +4,10 @@
       <h3 class="page__title">About me</h3>
 
       <div class="list-wrap">
-        <div class="gallery">
-          <div class="gallery__default-img">
-            <img
-              :src="slides[defaultSlide]"
-              :style="{height: '250px'}"
-              alt="my-photo"
-              @click="openModal"
-            />
-          </div>
-          <div class="gallery__modal" v-if="isGalleryOpened" @click.self="closeModal">
-            <Pagination :setDefault="setDefault" :defaultSlide="defaultSlide" :slides="slides"></Pagination>
-          </div>
-        </div>
+        <Gallery
+          :slides="slides"
+        >
+        </Gallery>
 
         <ul class="section-list">
           <li class="section-list__item section-list__name-container">
@@ -25,7 +16,8 @@
               class="section-list__name"
               :style="personNamePosition"
               @click="toggleSocialPanel"
-            >Alexander Piskun</p>
+            >
+              Alexander Piskun</p>
             <ul class="social-panel" :style="socialPanelPosition">
               <li>
                 <a
@@ -88,32 +80,21 @@ import personOne from "../assets/images/person-0.jpg";
 import personTwo from "../assets/images/person-1.jpg";
 import personThree from "../assets/images/person-2.jpg";
 
-import Pagination from "./Pagination";
+import Gallery from './Gallery';
 
 export default {
   components: {
-    Pagination
+    Gallery
   },
   data() {
     return {
-      isGalleryOpened: false,
       slides: [personOne, personTwo, personThree],
-      defaultSlide: 0,
       socialPanelRight: "-151px",
       socialPanelShown: false,
-      personNameRight: 0
+      personNameRight: '',
     };
   },
   methods: {
-    openModal() {
-      this.isGalleryOpened = true;
-    },
-    closeModal() {
-      this.isGalleryOpened = false;
-    },
-    setDefault(currentSlide) {
-      this.defaultSlide = currentSlide;
-    },
     showSocialPanel() {
       this.socialPanelRight = "10px";
     },
@@ -166,81 +147,7 @@ export default {
   min-height: 150px;
 }
 
-.gallery {
-  flex-grow: 1;
 
-  &__default-img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 250px;
-    overflow: hidden;
-    border-radius: 5%;
-
-    &:hover {
-      transform: scale(1.02);
-      transition: 0.1s;
-      box-shadow: 0 0 10px 0 hsla(132, 6%, 15%, 0.5);
-    }
-  }
-
-  &__modal {
-    position: absolute;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: hsla(132, 6%, 15%, 0.5);
-  }
-}
-
-.pagination {
-  display: grid;
-  grid-template-columns: 10% 1fr 10%;
-  width: 70%;
-  height: 60%;
-  justify-items: center;
-  align-items: center;
-  box-shadow: 0 0 50px 25px hsla(0, 0%, 100%, 0.3);
-
-  &__button {
-    width: 5vh;
-    height: 5vh;
-    background-color: inherit;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 0 10px 5px hsla(0, 0%, 100%, 0.3);
-
-    &:active {
-      transform: scale(0.9);
-      box-shadow: 0 0 15px 10px hsla(0, 0%, 100%, 0.3);
-    }
-  }
-
-  &__prev-button {
-    grid-area: 1 / 1 / 2 / 2;
-  }
-
-  &__content {
-    grid-area: 1 / 2 / 2 / 3;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
-
-  &__next-button {
-    grid-area: 1 / 3 / 2 / 4;
-  }
-}
 
 .section-list {
   flex-grow: 2;
@@ -292,6 +199,7 @@ export default {
 
   &__name {
     position: relative;
+    right: 0;
     transition: right 1s, transform 0.2s;
 
     &:hover {
