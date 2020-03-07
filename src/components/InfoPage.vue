@@ -93,23 +93,23 @@ export default {
           btnClass: "t-btn"
         }
       ],
-      socialPanelRight: "-181px",
+      socialPanelRight: "587px",
       socialPanelShown: false,
-      personNameRight: ""
+      personNameTranslate: "0"
     };
   },
   methods: {
     showSocialPanel() {
-      this.socialPanelRight = "10px";
+      this.socialPanelRight = "340px";
     },
     hideSocialPanel() {
-      this.socialPanelRight = "-181px";
+      this.socialPanelRight = "587px";
     },
     shiftPersonName() {
-      this.personNameRight = "191px";
+      this.personNameTranslate = "-240px";
     },
     unshiftPersonName() {
-      this.personNameRight = "0";
+      this.personNameTranslate = "0";
     },
     toggleSocialPanel() {
       if (this.socialPanelShown) {
@@ -125,12 +125,12 @@ export default {
   },
   computed: {
     socialPanelPosition() {
-      return { right: this.socialPanelRight };
+      return { transform: `translateX(${this.socialPanelRight})` };
     },
     personNamePosition() {
-      return { right: this.personNameRight };
+      return { transform: `translateX(${this.personNameTranslate})` };
     }
-  }
+  },
 };
 </script>
 
@@ -183,8 +183,10 @@ export default {
 
   &__item {
     display: flex;
+    align-items: center;
+    height: 50px;
     min-height: 40px;
-    padding: 10px 20px;
+    padding: 0 20px;
     font-weight: 400;
     font-size: 18px;
     word-spacing: 7px;
@@ -203,7 +205,7 @@ export default {
     }
 
     a {
-      height: 100%;
+      line-height: 1.6;
       color: hsl(349, 100%, 33%);
       border-bottom: 1px solid hsla(132, 6%, 15%, 0);
 
@@ -220,13 +222,9 @@ export default {
   }
 
   &__name {
-    position: relative;
-    right: 0;
-    transition: right 1s, transform 0.2s;
+    transition: box-shadow 0.4s, transform 1s;
 
     &:hover {
-      transform: scale(1.05);
-      transition: right 1s, transform 0.2s;
       text-shadow: 0 0 10px hsla(132, 6%, 15%, 0.5);
       cursor: pointer;
     }

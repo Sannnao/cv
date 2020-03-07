@@ -32,11 +32,11 @@ export default {
 .social-panel {
   position: absolute;
   z-index: 1;
-  right: -181px;
+  transform: translateX(241px);
   display: flex;
   background-color: hsl(0, 0%, 91%);
   list-style: none;
-  transition: right 0.5s;
+  transition: transform 0.8s;
 
   animation-name: social-shadow;
   animation-duration: 2s;
@@ -46,6 +46,7 @@ export default {
 .social-button {
   width: 30px;
   height: 30px;
+  margin: 5px;
 
   &:hover {
     transform: scale(1.1);
@@ -59,7 +60,7 @@ export default {
 }
 
 .github-btn {
-  background: url("../assets/images/facebook.png") 50% 50%/100% no-repeat;
+  background: url("../assets/images/github.png") 50% 50%/100% no-repeat;
 }
 
 .facebook-btn {
@@ -67,7 +68,7 @@ export default {
 }
 
 .vk-btn {
-  background: url("../assets/images/vk.png") 50% 50%/100% no-repeat;
+  background: url("../assets/images/vk.svg") 50% 50%/200% no-repeat;
 }
 
 .inst-btn {
@@ -79,6 +80,6 @@ export default {
 }
 
 .t-btn {
-  background: url("../assets/images/telegram.png") 50% 50%/100% no-repeat;
+  background: url("../assets/images/telegram.svg") 50% 50%/100% no-repeat;
 }
 </style>
