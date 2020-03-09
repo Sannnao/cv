@@ -3,9 +3,15 @@
     <div class="gallery__default-img">
       <img alt="my-photo" :src="slides[defaultSlide]" :style="{height: '250px'}" @click="openModal" />
     </div>
-    <div class="gallery__modal" v-if="isGalleryOpened" @click.self="closeModal">
-      <Pagination :setDefault="setDefault" :defaultSlide="defaultSlide" :slides="slides"></Pagination>
-    </div>
+    <transition name="fade-gallery">
+      <div class="gallery__modal" v-if="isGalleryOpened" @click.self="closeModal">
+        <Pagination
+          :setDefault="setDefault"
+          :defaultSlide="defaultSlide"
+          :slides="slides"
+        ></Pagination>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -38,6 +44,19 @@ export default {
 </script>
 
 <style lang="scss">
+.fade-gallery-enter {
+  opacity: 0;
+}
+
+.fade-gallery-enter-active {
+  transition: opacity 0.2s;
+}
+
+.fade-gallery-leave-active {
+  transition: opacity 0.2s;
+  opacity: 0;
+}
+
 .gallery {
   &__default-img {
     display: flex;
