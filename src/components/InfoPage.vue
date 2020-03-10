@@ -222,6 +222,8 @@ export default {
   }
 
   &__name {
+    position: relative;
+    z-index: 1;
     transition: box-shadow 0.4s, transform 1s;
 
     &:hover {

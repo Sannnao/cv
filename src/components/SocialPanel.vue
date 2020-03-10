@@ -31,11 +31,13 @@ export default {
 
 .social-panel {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   transform: translateX(241px);
   display: flex;
   list-style: none;
   transition: transform 0.8s;
+  background-color: #fff;
+  border-radius: 5px;
 
   animation-name: social-shadow;
   animation-duration: 2s;
