@@ -158,6 +158,10 @@ export default {
     justify-content: space-around;
     align-items: center;
     height: 80%;
+
+    @media screen and (max-width: $wrapper-width) {
+      flex-direction: row;
+    }
   }
 
   &__list-wrap {

@@ -76,4 +76,10 @@ h3 {
   grid-template-rows: 40px 1fr;
   height: 100vh;
 }
+
+@media screen and (max-width: $wrapper-width) {
+  .wrapper {
+    width: 100%;
+  }
+}
 </style>
