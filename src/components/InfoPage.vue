@@ -93,17 +93,17 @@ export default {
           btnClass: "t-btn"
         }
       ],
-      socialPanelRight: "587px",
+      socialPanelRight: "240px",
       socialPanelShown: false,
       personNameTranslate: "0"
     };
   },
   methods: {
     showSocialPanel() {
-      this.socialPanelRight = "340px";
+      this.socialPanelRight = "-10px";
     },
     hideSocialPanel() {
-      this.socialPanelRight = "587px";
+      this.socialPanelRight = "240px";
     },
     shiftPersonName() {
       this.personNameTranslate = "-240px";
@@ -142,13 +142,17 @@ export default {
   &__wrapper {
     display: flex;
     align-items: center;
+
+    @media screen and (max-width: $wrapper-width) {
+      flex-direction: column-reverse;
+      justify-content: space-around;
+    }
   }
 
   &__title {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 30vh;
   }
 
   &__gallery-wrap {
@@ -160,7 +164,19 @@ export default {
     height: 80%;
 
     @media screen and (max-width: $wrapper-width) {
+      flex-grow: 0;
       flex-direction: row;
+      width: 80%;
+      height: auto;
+    }
+
+    @media screen and (max-width: 650px) {
+      width: 100%;
+    }
+
+    @media screen and (max-width: 500px) {
+      flex-direction: column;
+      height: 70vh;
     }
   }
 
@@ -168,17 +184,39 @@ export default {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    justify-content: space-around;
+    height: 30vh;
     min-height: 150px;
+
+    @media screen and (max-width: $wrapper-width) {
+      flex-grow: 0;
+      width: 60%;
+    }
+
+    @media screen and (max-width: 850px) {
+      width: 70%;
+    }
+
+    @media screen and (max-width: 700px) {
+      width: 80%;
+    }
+
+    @media screen and (max-width: 600px) {
+      width: 90%;
+    }
   }
 }
 
 .section-list {
-  flex-grow: 2;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   list-style: inside;
   list-style-type: circle;
+
+  @media screen and (max-width: 700px) {
+    height: 80%;
+  }
 
   &__name-container {
     position: relative;
@@ -192,13 +230,18 @@ export default {
     min-height: 40px;
     padding: 0 20px;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 1.8rem;
     word-spacing: 7px;
-    line-height: 1.8em;
     letter-spacing: 1.5px;
     color: hsl(132, 6%, 15%);
     background-color: #fff;
     transition: background-color 0.5s;
+
+    @media screen and (max-width: 700px) {
+      flex-direction: column;
+      justify-content: space-around;
+      height: 80px;
+    }
 
     &:hover {
       background-color: hsl(0, 0%, 91%);
@@ -206,6 +249,12 @@ export default {
 
     span {
       flex-grow: 1;
+
+      @media screen and (max-width: 700px) {
+        flex-grow: 0;
+        font-weight: 600;
+        color: #3d423e;
+      }
     }
 
     a {
@@ -217,6 +266,10 @@ export default {
         transform: scale(1.1);
         border-bottom: 1px solid hsla(132, 6%, 15%, 0.5);
         transition: 0.1s;
+
+      @media screen and (max-width: 550px) {
+        transform: scale(1.02);
+      }
       }
 
       &:active {

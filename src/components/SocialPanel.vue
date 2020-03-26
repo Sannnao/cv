@@ -31,8 +31,9 @@ export default {
 
 .social-panel {
   position: absolute;
+  right: 0;
   z-index: 2;
-  transform: translateX(241px);
+  transform: translateX(240px);
   display: flex;
   list-style: none;
   transition: transform 0.8s;
