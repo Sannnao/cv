@@ -178,6 +178,14 @@ export default {
       flex-direction: column;
       height: 70vh;
     }
+
+    @media screen and (max-height: 770px) {
+      height: 80vh;
+    }
+
+    @media screen and (max-height: 680px) {
+      height: 90vh;
+    }
   }
 
   &__list-wrap {

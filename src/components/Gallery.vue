@@ -67,6 +67,11 @@ export default {
     overflow: hidden;
     border-radius: 5%;
 
+    @media screen and (max-height: 620px) {
+      width: 200px;
+      height: 200px;
+    }
+
     &:hover {
       transform: scale(1.02);
       transition: 0.1s;
