@@ -43,32 +43,46 @@ export default {
 <style lang="scss">
 .pagination {
   display: grid;
-  grid-template-columns: 10% 1fr 10%;
+  grid-template-columns: 10% 76% 10%;
+  grid-gap: 2%;
   width: 70%;
   height: 60%;
+  padding: 2%;
   justify-items: center;
   align-items: center;
   box-shadow: 0 0 50px 25px hsla(0, 0%, 100%, 0.3);
 
+  @media screen and (max-width: $wrapper-width) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 90%;
+  }
+
+  @media screen and (max-width: 600px) {
+    grid-template-columns: 49% 49%;
+    grid-template-rows: 86% 10%;
+  }
+
   &__button {
     @keyframes pagination-btn-shadow {
+      0% {
+        box-shadow: 0 0 8px 0px hsla(0, 0%, 100%, 0.3);
+      }
 
-  0% {
-    box-shadow: 0 0 8px 0px hsla(0, 0%, 100%, 0.3);
-  }
+      50% {
+        box-shadow: 0 0 15px 0px hsla(0, 0%, 100%, 0.3);
+      }
 
-  50% {
-    box-shadow: 0 0 15px 0px hsla(0, 0%, 100%, 0.3);
-  }
+      100% {
+        box-shadow: 0 0 8px 0px hsla(0, 0%, 100%, 0.3);
+      }
+    }
 
-  100% {
-    box-shadow: 0 0 8px 0px hsla(0, 0%, 100%, 0.3);
-  }
-}
-
-  animation-name: pagination-btn-shadow;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
+    animation-name: pagination-btn-shadow;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
 
     width: 5vh;
     height: 5vh;
@@ -89,19 +103,32 @@ export default {
 
   &__prev-button {
     grid-area: 1 / 1 / 2 / 2;
+
+    @media screen and (max-width: 600px) {
+      grid-area: 2 / 1 / 3 / 2;
+    }
   }
 
   &__content {
     grid-area: 1 / 2 / 2 / 3;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
+
+    @media screen and (max-width: 600px) {
+      grid-area: 1 / 1 / 2 / 3;
+    }
   }
 
   &__next-button {
     grid-area: 1 / 3 / 2 / 4;
+
+    @media screen and (max-width: 600px) {
+      grid-area: 2 / 2 / 3 / 3;
+    }
   }
 }
 </style>
