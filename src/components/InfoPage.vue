@@ -6,18 +6,26 @@
         <Gallery :slides="portfolioSlides"></Gallery>
       </div>
 
-      <div class="page__list-wrap">
+      <div class="page__list-wrap" ref="listWrap">
         <h3 class="page__title">About me</h3>
 
         <ul class="section-list">
-          <li class="section-list__item section-list__name-container">
-            <span>Name:</span>
+          <li
+            class="section-list__item section-list__name-container"
+            @click.self="toogleSocialMobile"
+          >
+            <span :style="nameTitlePosition">Name:</span>
             <p
               class="section-list__name"
               :style="personNamePosition"
               @click="toggleSocialPanel"
+              ref="personName"
             >Alexander Piskun</p>
-            <SocialPanel :style="socialPanelPosition" :socialList="socialPanelData"></SocialPanel>
+            <SocialPanel
+              :style="socialPanelPosition"
+              :socialList="socialPanelData"
+              ref="socialPanel"
+            ></SocialPanel>
           </li>
           <li class="section-list__item">
             <span>E-mail:</span>
@@ -95,31 +103,62 @@ export default {
       ],
       socialPanelRight: "240px",
       socialPanelShown: false,
-      personNameTranslate: "0"
+      personNameTranslate: "0",
+      nameTitleTranslate: "0",
+      listWrapWidth: null,
+      socialPanelWidth: null,
+      personNameWidth: null,
+      currentPanelShowAmount: 10,
+      nameShiftAmount: 240
     };
   },
   methods: {
     showSocialPanel() {
-      this.socialPanelRight = "-10px";
+      this.socialPanelRight = `-${this.currentPanelShowAmount}px`;
     },
     hideSocialPanel() {
       this.socialPanelRight = "240px";
     },
     shiftPersonName() {
-      this.personNameTranslate = "-240px";
+      this.personNameTranslate = `-${this.nameShiftAmount}px`;
     },
     unshiftPersonName() {
       this.personNameTranslate = "0";
     },
+    shiftNameTitle() {
+      this.nameTitleTranslate = `-27px`;
+    },
+    unshiftNameTitle() {
+      this.nameTitleTranslate = `0px`;
+    },
     toggleSocialPanel() {
-      if (this.socialPanelShown) {
-        this.hideSocialPanel();
-        this.unshiftPersonName();
-        this.socialPanelShown = false;
-      } else {
-        this.showSocialPanel();
-        this.shiftPersonName();
-        this.socialPanelShown = true;
+      if (this.listWrapWidth <= 560) {
+        if (this.socialPanelShown) {
+          this.hideSocialPanel();
+          this.unshiftPersonName();
+          this.unshiftNameTitle();
+          this.socialPanelShown = false;
+        } else {
+          this.showSocialPanel();
+          this.shiftPersonName();
+          this.shiftNameTitle();
+          this.socialPanelShown = true;
+        }
+      } else if (this.listWrapWidth > 560) {
+        if (this.socialPanelShown) {
+          this.hideSocialPanel();
+          this.unshiftPersonName();
+          this.socialPanelShown = false;
+        } else {
+          this.showSocialPanel();
+          this.shiftPersonName();
+          this.socialPanelShown = true;
+        }
+      }
+    },
+    toogleSocialMobile() {
+      if (this.listWrapWidth <= 560) {
+        this.toggleSocialPanel();
       }
     }
   },
@@ -129,8 +168,33 @@ export default {
     },
     personNamePosition() {
       return { transform: `translateX(${this.personNameTranslate})` };
+    },
+    nameTitlePosition() {
+      return { transform: `translateY(${this.nameTitleTranslate})` };
     }
   },
+  watch: {
+    listWrapWidth(newWidth) {
+      if (newWidth <= 560) {
+        this.currentPanelShowAmount =
+          Math.floor(this.listWrapWidth / 2 - this.socialPanelWidth / 2);
+        this.nameShiftAmount = Math.floor(this.listWrapWidth / 2 + this.personNameWidth / 2);
+      } else {
+        this.currentPanelShowAmount = 10;
+        this.nameShiftAmount = 240;
+        this.nameTitleTranslate = 0;
+      }
+    }
+  },
+  mounted() {
+    this.listWrapWidth = this.$refs.listWrap.clientWidth;
+    this.socialPanelWidth = this.$refs.socialPanel.$el.clientWidth;
+    this.personNameWidth = this.$refs.personName.clientWidth;
+
+    window.addEventListener("resize", () => {
+      this.listWrapWidth = this.$refs.listWrap.clientWidth;
+    });
+  }
 };
 </script>
 
@@ -205,7 +269,7 @@ export default {
       width: 70%;
     }
 
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: 780px) {
       width: 80%;
     }
 
@@ -257,6 +321,7 @@ export default {
 
     span {
       flex-grow: 1;
+      transition: transform 1s;
 
       @media screen and (max-width: 700px) {
         flex-grow: 0;
@@ -275,9 +340,9 @@ export default {
         border-bottom: 1px solid hsla(132, 6%, 15%, 0.5);
         transition: 0.1s;
 
-      @media screen and (max-width: 550px) {
-        transform: scale(1.02);
-      }
+        @media screen and (max-width: 550px) {
+          transform: scale(1.02);
+        }
       }
 
       &:active {
