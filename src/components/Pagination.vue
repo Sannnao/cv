@@ -4,7 +4,7 @@
     <div class="pagination__content">
       <img
         :src="slides[currentSlide]"
-        :style="{height: '500px'}"
+        :style="{height: '100%'}"
         alt="my-photo"
         @click="setDefault(currentSlide)"
       />
@@ -42,23 +42,19 @@ export default {
 
 <style lang="scss">
 .pagination {
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  left: 0;
   display: grid;
   grid-template-columns: 10% 76% 10%;
   grid-gap: 2%;
-  width: 70%;
-  height: 60%;
+  width: 100%;
+  height: 100%;
   padding: 2%;
   justify-items: center;
   align-items: center;
-  box-shadow: 0 0 50px 25px hsla(0, 0%, 100%, 0.3);
-
-  @media screen and (max-width: $wrapper-width) {
-    width: 80%;
-  }
-
-  @media screen and (max-width: 700px) {
-    width: 90%;
-  }
+  background-color: hsla(132, 6%, 15%, 0.5);
 
   @media screen and (max-width: 600px) {
     grid-template-columns: 49% 49%;
@@ -86,7 +82,7 @@ export default {
 
     width: 5vh;
     height: 5vh;
-    background-color: inherit;
+    background-color: hsla(132, 6%, 15%, 0);
     outline: none;
     border: none;
     border-radius: 5px;
@@ -115,7 +111,7 @@ export default {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: 60%;
     overflow: hidden;
 
     @media screen and (max-width: 600px) {
