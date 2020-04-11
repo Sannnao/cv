@@ -4,13 +4,14 @@
       <img alt="my-photo" :src="slides[defaultSlide]" :style="{height: '250px'}" @click="openModal" />
     </div>
     <transition name="fade-gallery">
-      <div class="gallery__modal" v-if="isGalleryOpened" @click.self="closeModal">
+
         <Pagination
+        v-if="isGalleryOpened" @click.native.self="closeModal"
           :setDefault="setDefault"
           :defaultSlide="defaultSlide"
           :slides="slides"
         ></Pagination>
-      </div>
+
     </transition>
   </div>
 </template>

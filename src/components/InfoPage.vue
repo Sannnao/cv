@@ -3,7 +3,7 @@
     <div class="wrapper page__wrapper">
       <div class="page__gallery-wrap">
         <Gallery :slides="personSlides"></Gallery>
-        <Gallery :slides="portfolioSlides"></Gallery>
+        <Gallery :slides="portfolioSlides" v-if="!isMobile"></Gallery>
       </div>
 
       <div class="page__list-wrap" ref="listWrap">
@@ -171,6 +171,9 @@ export default {
     },
     nameTitlePosition() {
       return { transform: `translateY(${this.nameTitleTranslate})` };
+    },
+    isMobile() {
+      return this.listWrapWidth <= 560;
     }
   },
   watch: {
@@ -240,15 +243,6 @@ export default {
 
     @media screen and (max-width: 500px) {
       flex-direction: column;
-      height: 70vh;
-    }
-
-    @media screen and (max-height: 770px) {
-      height: 80vh;
-    }
-
-    @media screen and (max-height: 680px) {
-      height: 90vh;
     }
   }
 
