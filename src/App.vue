@@ -1,38 +1,43 @@
 <template>
   <div class="app-wrapper">
     <Header :menuItems="menuItems"></Header>
-    <main>
-      <InfoPage></InfoPage>
+    <main class="main">
+      <router-view></router-view>
     </main>
   </div>
 </template>
 
 <script>
 import Header from "./components/Header";
-import InfoPage from "./components/InfoPage";
 
 export default {
   components: {
     Header,
-    InfoPage
   },
   data() {
     return {
       menuItems: [
-        { link: "#about-me", title: "About me" },
-        { link: "#summary", title: "Summary" },
-        { link: "#skills", title: "Skills" },
-        { link: "#experience", title: "Experience" },
-      ]
+        { link: "/about-me", title: "About me" },
+        { link: "/experience", title: "Experience" },
+      ],
     };
+  },
+  beforeCreate() {
+    document.title = 'Alex Piskun CV'
   }
 };
 </script>
 
 <style lang="scss">
+@import "@/scss/_variables.scss";
 @font-face {
   font-family: "Montserrat";
   src: url("./assets/fonts/Montserrat/Montserrat-Regular.ttf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Merriweather";
+  src: url("./assets/fonts/Merriweather-Regular.ttf");
   font-weight: 400;
 }
 
@@ -56,7 +61,23 @@ body {
 
 a {
   text-decoration: none;
-  color: inherit;
+  line-height: 1.6;
+  color: hsl(349, 100%, 33%);
+  border-bottom: 1px solid hsla(132, 6%, 15%, 0);
+
+  &:hover {
+    transform: scale(1.1);
+    border-bottom: 1px solid hsla(132, 6%, 15%, 0.5);
+    transition: 0.1s;
+
+    @media screen and (max-width: 550px) {
+      transform: scale(1.02);
+    }
+  }
+
+  &:active {
+    text-shadow: hsl(349, 100%, 33%) 0px 0px 1px;
+  }
 }
 
 h1 {
@@ -67,6 +88,12 @@ h1 {
 h3 {
   font-size: 3rem;
   color: $h-color;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
 }
 
 .wrapper {

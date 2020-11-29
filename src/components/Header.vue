@@ -5,10 +5,12 @@
         <ul class="menu">
           <li
             class="menu__item"
-            v-for="({link, title}) in menuItems"
+            v-for="{ link, title } in menuItems"
             :key="link"
           >
-            <a :href="link">{{ title }}</a>
+            <router-link class="router-link" :to="link">{{
+              title
+            }}</router-link>
           </li>
         </ul>
       </nav>
@@ -18,20 +20,14 @@
 
 <script>
 export default {
-  props: ["menuItems"]
+  props: ["menuItems"],
 };
 </script>
 
 <style lang="scss">
 .header {
   position: relative;
-  top: -30px;
   background-color: hsl(173, 14%, 12%);
-  transition: top 1s;
-
-  &:hover {
-    top: 0;
-  }
 
   &__navigation {
     height: 100%;
@@ -51,27 +47,25 @@ export default {
     text-align: center;
     color: hsl(180, 7%, 57%);
 
-    a {
+    .router-link {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100%;
       font-size: 1.7rem;
+      color: inherit;
 
       &:hover {
         transform: scale(1.1);
         transition: 0.2s;
+        color: hsl(180, 31%, 82%);
+        background-color: hsl(173, 12%, 27%);
+        opacity: 0.9;
       }
-    }
 
-    &:hover {
-      color: hsl(180, 31%, 82%);
-      background-color: hsl(173, 12%, 27%);
-      opacity: 0.9;
-    }
-
-    &:active {
-      color: hsl(0, 0%, 100%);
+      &:active {
+        color: hsl(0, 0%, 100%);
+      }
     }
   }
 }

@@ -202,6 +202,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/scss/_variables.scss";
+
 .page {
   display: flex;
   height: 100%;
@@ -321,26 +323,6 @@ export default {
         flex-grow: 0;
         font-weight: 600;
         color: #3d423e;
-      }
-    }
-
-    a {
-      line-height: 1.6;
-      color: hsl(349, 100%, 33%);
-      border-bottom: 1px solid hsla(132, 6%, 15%, 0);
-
-      &:hover {
-        transform: scale(1.1);
-        border-bottom: 1px solid hsla(132, 6%, 15%, 0.5);
-        transition: 0.1s;
-
-        @media screen and (max-width: 550px) {
-          transform: scale(1.02);
-        }
-      }
-
-      &:active {
-        text-shadow: hsl(349, 100%, 33%) 0px 0px 1px;
       }
     }
   }
