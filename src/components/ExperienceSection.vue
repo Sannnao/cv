@@ -18,8 +18,8 @@
     <h2 class="experience-section__title">Period:</h2>
     <p class="experience-section__option">{{ period }}</p>
 
-    <h2 class="experience-section__title">Description:</h2>
-    <p class="experience-section__option">
+    <h2 class="experience-section__title" v-if="projectDescription">Description:</h2>
+    <p class="experience-section__option" v-if="projectDescription">
       {{ projectDescription }}
     </p>
 

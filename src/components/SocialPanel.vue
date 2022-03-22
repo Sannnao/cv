@@ -1,6 +1,6 @@
 <template>
   <ul class="social-panel">
-    <li v-for="({link, title, btnClass}) in socialList" :key="link">
+    <li v-for="{ link, title, btnClass } in socialPanelData" :key="link">
       <a :href="link" :title="title" target="_blank">
         <div class="social-button" :class="btnClass"></div>
       </a>
@@ -10,7 +10,37 @@
 
 <script>
 export default {
-  props: ["socialList"]
+  data() {
+    return {
+      socialPanelData: [
+        {
+          link: "https://github.com/sannnao",
+          title: "to github",
+          btnClass: "github-btn",
+        },
+        {
+          link: "https://www.facebook.com/profile.php?id=100001634313768",
+          title: "to facebook",
+          btnClass: "facebook-btn",
+        },
+        {
+          link: "https://vk.com/bluestone",
+          title: "to vk",
+          btnClass: "vk-btn",
+        },
+        {
+          link: "https://www.instagram.com/stormyweather_hoho/",
+          title: "to instagram",
+          btnClass: "inst-btn",
+        },
+        {
+          link: "https://www.linkedin.com/in/alexander-piskun-0a2a13175/",
+          title: "to linkedin",
+          btnClass: "in-btn",
+        },
+      ],
+    };
+  },
 };
 </script>
 
@@ -30,13 +60,10 @@ export default {
 }
 
 .social-panel {
-  position: absolute;
-  right: 0;
-  z-index: 2;
-  transform: translateX(240px);
   display: flex;
+  width: max-content;
+  height: max-content;
   list-style: none;
-  transition: transform 0.8s;
   background-color: #fff;
   border-radius: 5px;
 
@@ -79,9 +106,5 @@ export default {
 
 .in-btn {
   background: url("../assets/images/linkedin.png") 50% 50%/100% no-repeat;
-}
-
-.t-btn {
-  background: url("../assets/images/telegram.svg") 50% 50%/100% no-repeat;
 }
 </style>
