@@ -36,7 +36,7 @@ export default {
           const doc = new jsPDF({
             orientation: "portrait",
             unit: "px",
-            format: [600, 1600],
+            format: [600, 2000],
           });
           doc.addImage(img, "JPEG", 20, 20);
           doc.save("Alexander_Piskun.pdf");

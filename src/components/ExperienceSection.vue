@@ -86,14 +86,27 @@ export default {
   }
 
   &__option {
+    max-width: 60%;
     font-size: 14px;
     font-family: "Merriweather", serif;
     word-spacing: 6px;
     letter-spacing: 0.5px;
     line-height: 1.6;
 
+    @media screen and (max-width: 1000px) {
+      max-width: 80%;
+    }
+
+    @media screen and (max-width: 600px) {
+      max-width: 100%;
+    }
+
     &-list {
       margin-left: 20px;
+
+      & li {
+        margin-bottom: 10px;
+      }
     }
   }
 }
